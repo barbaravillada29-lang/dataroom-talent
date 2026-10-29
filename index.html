@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Data Room TALENT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: brand-dark file vault — header + progress strip, then one folder per week of the núcleo, each a list of file rows */
+:root{
+  --ink:#0f0f0f; --ink-2:#171615; --ink-3:#201e1b; --line:#2e2b27;
+  --bone:#f3efe7; --sand:#e5d9c3; --taupe:#9c8a6b; --mute:#a39c90; --soft:#d9d3c8;
+  --ok:#9fb58d; --warn:#d9b26a;
+  --body:"Outfit",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--bone);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+[hidden]{display:none!important}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sand);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe);font-weight:400}
+h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ink) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;height:56px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:500;font-size:17px}
+.brand img{width:24px;height:24px;border-radius:6px}
+.brand span{color:var(--mute);font-weight:300}
+.top .mono{margin-left:auto}
+
+header.hero{padding-block:56px 32px}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:1}
+.hero h1 em{font-style:normal;color:var(--sand)}
+.hero p.lede{margin-top:16px;color:var(--mute);max-width:62ch;font-size:17px}
+.meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px}
+.meta span{font-family:var(--mono);font-size:12px;padding:7px 11px;border:1px solid var(--line);border-radius:8px;color:var(--soft)}
+
+.feature{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-bottom:40px}
+@media (max-width:820px){.feature{grid-template-columns:1fr}}
+.fcard{border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.fcard.sand{background:var(--sand);color:var(--ink)}
+.fcard.sand .mono{color:#6b5d45}
+.fcard.sand p{color:#3b352c}
+.fcard.dark{background:var(--ink-2);border:1px solid var(--line)}
+.fcard h2{font-size:28px;line-height:1.1}
+.fcard .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:500;padding:10px 16px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.solid{background:var(--ink);color:var(--sand)}
+.btn.line{background:transparent;border-color:#6b5d45;color:var(--ink)}
+.dark .btn.solid,.file .btn.solid{background:var(--sand);color:var(--ink)}
+.dark .btn.line,.file .btn.line{border-color:var(--line);color:var(--bone)}
+.btn.line:hover{border-color:var(--taupe)}
+.link-box{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--mute);word-break:break-all}
+.copy{font:inherit;font-size:12px;background:var(--ink-3);color:var(--sand);border:1px solid var(--line);border-radius:6px;padding:4px 8px;cursor:pointer}
+
+.prog{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:12px}
+.prog div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.prog i{height:8px;border-radius:99px;background:var(--ink-3);display:block}
+.prog .done i{background:var(--sand)}
+.prog .now i{background:linear-gradient(90deg,var(--sand) 50%,var(--ink-3) 50%)}
+.prog small{font-family:var(--mono);font-size:10px;color:var(--mute);letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog .now small{color:var(--sand)}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 8px}
+.chip{font:inherit;font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--mute);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--sand);color:var(--ink);border-color:var(--sand)}
+
+.folder{border-top:1px solid var(--line);padding-block:32px}
+.fhead{display:grid;grid-template-columns:72px 1fr auto;gap:16px;align-items:start;margin-bottom:18px}
+.fnum{font-family:var(--mono);font-size:13px;color:var(--taupe);padding-top:6px}
+.fhead h3{font-size:24px;line-height:1.2}
+.fhead p{color:var(--mute);font-size:14px;margin-top:4px}
+.pill{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:99px;white-space:nowrap}
+.pill.c{background:rgba(159,181,141,.15);color:var(--ok)}
+.pill.p{background:rgba(217,178,106,.15);color:var(--warn)}
+.pill.i{background:var(--ink-3);color:var(--mute)}
+.files{margin-left:88px;display:flex;flex-direction:column;gap:8px}
+@media (max-width:640px){.fhead{grid-template-columns:1fr auto}.fnum{display:none}.files{margin-left:0}}
+.file{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--ink-2)}
+.file.empty{background:none;border-style:dashed}
+.ext{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.04em;background:var(--ink-3);color:var(--sand)}
+.ext.pdf{background:#3a2a24;color:#f0c9b8}.ext.doc{background:#232c38;color:#c3d6ef}.ext.ppt{background:#3a2a1c;color:#f1cfa6}.ext.xls{background:#22301f;color:#c4dfb6}.ext.web{background:var(--sand);color:var(--ink)}
+.file b{font-weight:500;display:block}
+.file small{color:var(--mute);font-size:13px}
+.acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.acts .btn{padding:7px 12px;font-size:13px}
+@media (max-width:640px){.file{grid-template-columns:44px 1fr}.acts{grid-column:1/-1;justify-content:flex-start}}
+
+footer{border-top:1px solid var(--line);padding-block:32px 48px;margin-top:24px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--mute);font-size:13px}
+.toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sand);color:var(--ink);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:500;z-index:30}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="top"><div class="wrap">
+  <div class="brand"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCACgAKADASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAIJAQYKBwUE/8QAOxAAAgIAAwIIDQQBBQAAAAAAAAECAwQFBgcRCBMWITFRddISMzc4QVJVYXKRlLKzGDJXk2IVQlNjgf/EABkBAQADAQEAAAAAAAAAAAAAAAACBAUDAf/EABwRAQEBAAMBAQEAAAAAAAAAAAABAgMRMQQyUf/aAAwDAQACEQMRAD8AsS1BqC2V88NhpuuuD8GU49Mn6efqNelJye9tt9bEpOUm3ztveYMDe7yXutPOZmdQABzSAAAAAAAAAAAAAAAAAABmMnF702n1o2HT+oLY3ww2Jm7K5vwYzl0xfo5+o10zFuMk1zNPejpjd473EdZmp1WAAc0gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAElVNr9kvkZ4mz1JfICAJ8TZ6kvkOJs9SXyAgCfE2epL5DibPUl8gIAnxNnqS+Rh1TS/ZL5ARAAAAAAAAAAAAACVS32wXvRElW1GyLfQmmBQZrTWmocZrLP778/zW26zMMRKU5Y23e3xsv8j4/KrPPbeZ/W2949n1bwM9tvKvO3Vs4zjFVSx18oX4eNc67IuyTUoy8LnTTTPk/o024fxjn39UO8b83jr2M2zXfjy7lVnntvM/rbe8OVWee28z+tt7x6kuBltxk0lsxz5t/wDVDvHj2Mwd2X4zEYTE1ypxOHslTbVLphOLalF+9NNEpc3yvLLPX7+VWee28z+tt7w5VZ57bzP623vENO6dzPV2fYDJMmwVuZZtj7o4fC4ShJzusfRGO/0s9U/Rptw/jHPv6od4W5ntJLfHl3KrPPbeZ/W294+xozWmocFrLIL6M/zWq6vMMPKM4423enxsf8jef0abcP4xz7+qHePraS4Ge23lXkjt2cZxhao46iU78RGuFdcVZFuUpeFzJJNkbvHXseya/i6S1brZr3siSsalZJrobZEwGkAAAAAAAAAAAAAAAAnT46v4kc/20Lygap7Wxn55nQDT46v4kc/20Lygap7Wxn55mj8fulbn8je+CR5z2y/t7DfcXhlHnBI857Zf29hvuLwyP1/qPeD80ABQWAAAAAAAAAAAAAAAAAAATp8dX8SOf7aF5QNU9rYz88zoBp8dX8SOf7aF5QNU9rYz88zR+P3Stz+RvfBI857Zf29hvuLwyjzgkec9sv7ew33F4ZH6/wBR7wfmgAKCwAAAAAAAAAAAAAAAAAACdPjq/iRz/bQvKBqntbGfnmdANL3Wwb5l4SKFtpWjNQ4TaPqum7Ic0rsjm2L3xeCt/wCabX+3qND5PdK3P5Gx8Ejzntl/b2G+4vDKUuCNpHPpcJvZrZ/omZKunOqbrZywdijCEd7lKTa3JJLe2y60j9f6j3g/NAAUVgAAAAAAAAAAAAAAAAAAAkrZronJf+kQBJ2TktzlJr3siAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZlFxk0+Zp7jBsWoNP2xvnicNB2VzfhShHpi/TzdRr0ouL3NNPqZ03i8d6qOdTU7jAAOaQAAAAAAAAAAAAAAAAAABmKcpJLnbe5CMXJ7km31I2HT+n7ZXwxOJg664Pwowl0yfo5uo6YxeS9RHWpmd1//Z" alt="">Talent <span>Data Room</span></div>
+  <span class="mono">Equipo consultor · CEIPA</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <p class="mono">Laboratorio de Ideas: Creación de Empresa · 19 oct – 13 dic 2026</p>
+  <h1 style="margin-top:14px">Data Room de la consultoría <em>TALENT</em></h1>
+  <p class="lede">Aquí guardamos todas las entregas y avances del Trabajo de Aplicación, organizadas por semana del núcleo. Cada carpeta corresponde a una entrega en Canvas.</p>
+  <div class="meta">
+    <span>Docente · Santiago Arias Torres</span>
+    <span>Grupo · 123217</span>
+    <span>Cliente · TALENT, Medellín</span>
+    <span>5 consultoras</span>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <section class="feature" aria-label="Destacados">
+    <div class="fcard sand">
+      <p class="mono">Brochure del equipo consultor</p>
+      <h2>Conoce al equipo: perfiles, test de entrada, acuerdo y cronograma</h2>
+      <p>Página web con los perfiles de las cinco consultoras, la lectura del test de entrada, el acuerdo de trabajo en equipo, el Gantt de las ocho semanas y las firmas.</p>
+      <div class="row">
+        <a class="btn solid" href="brochure/index.html" target="_blank" rel="noopener">Abrir brochure ↗</a>
+        <a class="btn line" id="ghBtn" href="#" target="_blank" rel="noopener" hidden>Ver en GitHub ↗</a>
+      </div>
+      <div class="link-box" id="ghPending" style="color:#6b5d45">Versión en GitHub Pages: pendiente de publicar</div>
+    </div>
+    <div class="fcard dark">
+      <p class="mono">Avance del núcleo</p>
+      <h2 id="progTitle">Semana 2 de 8</h2>
+      <div class="prog" id="prog"></div>
+      <p style="color:var(--mute);font-size:14px" id="progText"></p>
+    </div>
+  </section>
+
+  <div class="filters" role="group" aria-label="Filtrar carpetas">
+    <button class="chip" type="button" data-f="all" aria-pressed="true">Todas</button>
+    <button class="chip" type="button" data-f="ta" aria-pressed="false">Trabajos de Aplicación</button>
+    <button class="chip" type="button" data-f="cf" aria-pressed="false">Cine foros</button>
+    <button class="chip" type="button" data-f="eq" aria-pressed="false">Equipo</button>
+  </div>
+  <div id="folders"></div>
+</main>
+
+<footer><div class="wrap">
+  <span>Talent · People Infrastructure</span>
+  <span>Última actualización: 28 de octubre de 2026</span>
+</div></footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+// Configure here: GitHub Pages URL of the brochure once published
+const GITHUB_BROCHURE = "";
+
+const FOLDERS = [
+ {id:'equipo',num:'00',k:'eq',title:'Equipo consultor',desc:'Documentos de conformación del equipo y planeación general.',st:'c',files:[
+   {t:'Brochure del equipo consultor',d:'Página web · perfiles, test, acuerdo, cronograma y firmas',ext:'web',open:'brochure/index.html'},
+   {t:'Cronograma general (Gantt)',d:'Excel · 19 oct – 13 dic 2026 · responsables y estados',ext:'xls',dl:'files/Cronograma_Gantt_TALENT.xlsx.b64.txt'}]},
+ {id:'s1',num:'S1',k:'cf',title:'Semana 1 · Cine foro reflexivo 1',desc:'Individual · La red social · 19 – 25 oct',st:'c',files:[
+   {t:'Video presentación cine foro 1',d:'Enlace al repositorio del video',ext:'vid',empty:true}]},
+ {id:'diag',num:'S2',k:'ta',title:'Semana 2 · Diagnóstico inicial',desc:'Punto de partida · entrega 30 oct · carpeta “Diagnóstico”',st:'p',files:[
+   {t:'Brochure del equipo consultor',d:'Elemento 1 · página web',ext:'web',open:'brochure/index.html'},
+   {t:'Informe escrito de consultoría',d:'Elemento 2 · selección, BMC, diagnóstico y ruta',ext:'pdf',open:'files/Informe_Consultoria_TALENT.pdf',dl:'files/Informe_Consultoria_TALENT.pdf',alt:{label:'Word',dl:'files/Informe_Consultoria_TALENT.docx.b64.txt'}},
+   {t:'Accountability · presentación al cliente',d:'Elemento 3 · 12 diapositivas',ext:'pdf',open:'files/Accountability_TALENT.pdf',dl:'files/Accountability_TALENT.pdf',alt:{label:'PowerPoint',dl:'files/Accountability_TALENT.pptx.b64.txt'}},
+   {t:'Evidencias del diagnóstico',d:'Consulta RUES, pantallazos de la reunión, acta firmada, RUT, PILA y licencia SST',ext:'img',empty:true}]},
+ {id:'ta1',num:'S3',k:'ta',title:'Semana 3 · TA1 Formalización de entrada',desc:'Debida diligencia · 2 – 8 nov',st:'i',files:[
+   {t:'Informe escrito de consultoría TA1',d:'Tipo societario, estatutos S.A.S., marca y matriz de vacíos',ext:'doc',empty:true},
+   {t:'Accountability TA1',d:'Presentación al cliente',ext:'ppt',empty:true}]},
+ {id:'s4',num:'S4',k:'cf',title:'Semana 4 · Cine foro reflexivo 2',desc:'Individual · Pepsi, ¿dónde está mi avión? · 9 – 15 nov',st:'i',files:[
+   {t:'Video presentación cine foro 2',d:'Enlace al repositorio del video',ext:'vid',empty:true}]},
+ {id:'ta2',num:'S5',k:'ta',title:'Semana 5 · TA2 Expansión empresarial',desc:'Debida diligencia · 16 – 22 nov',st:'i',files:[
+   {t:'Informe escrito de consultoría TA2',d:'Consumidor, datos personales, contratos y riesgos',ext:'doc',empty:true},
+   {t:'Accountability TA2',d:'Presentación al cliente',ext:'ppt',empty:true}]},
+ {id:'s6',num:'S6',k:'cf',title:'Semana 6 · Cine foro reflexivo 3',desc:'Individual · BlackBerry · 23 – 29 nov',st:'i',files:[
+   {t:'Video presentación cine foro 3',d:'Enlace al repositorio del video',ext:'vid',empty:true}]},
+ {id:'ta3',num:'S7',k:'ta',title:'Semana 7 · TA3 Crisis empresarial',desc:'Debida diligencia · 30 nov – 6 dic',st:'i',files:[
+   {t:'Informe escrito de consultoría TA3',d:'Información financiera, Ley 1116 y continuidad',ext:'doc',empty:true},
+   {t:'Accountability TA3',d:'Presentación al cliente',ext:'ppt',empty:true}]},
+ {id:'ta4',num:'S8',k:'ta',title:'Semana 8 · TA4 Sustentación',desc:'Muestra final · 7 – 11 dic',st:'i',files:[
+   {t:'Presentación del Trabajo de Aplicación 4',d:'Sustentación ante el docente y el cliente',ext:'ppt',empty:true}]}
+];
+const ST={c:['c','Completada'],p:['p','En entrega'],i:['i','Por iniciar']};
+const EXT={web:'WEB',pdf:'PDF',doc:'DOC',ppt:'PPT',xls:'XLS',vid:'VID',img:'IMG'};
+const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[n,v]of Object.entries(a)){if(n==='class')e.className=v;else if(n==='text')e.textContent=v;else e.setAttribute(n,v);}k.forEach(c=>c&&e.append(c));return e;};
+
+let downloads=null;
+const toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2600);};
+function save(path){
+  const real=path.replace('.b64.txt','');
+  const a=document.createElement('a');a.href=real;a.download=real.split('/').pop();document.body.append(a);a.click();a.remove();
+}
+
+function render(filter){
+  const box=document.getElementById('folders');box.replaceChildren();
+  FOLDERS.filter(f=>filter==='all'||f.k===filter).forEach(f=>{
+    const sec=el('section',{class:'folder',id:f.id});
+    sec.append(el('div',{class:'fhead'},el('span',{class:'fnum',text:f.num}),el('div',{},el('h3',{text:f.title}),el('p',{text:f.desc})),el('span',{class:'pill '+ST[f.st][0],text:ST[f.st][1]})));
+    const list=el('div',{class:'files'});
+    f.files.forEach(x=>{
+      const row=el('div',{class:'file'+(x.empty?' empty':'')});
+      row.append(el('span',{class:'ext '+x.ext,text:EXT[x.ext]}),el('div',{},el('b',{text:x.t}),el('small',{text:x.d})));
+      const acts=el('div',{class:'acts'});
+      if(x.empty){acts.append(el('span',{class:'pill i',text:'Pendiente'}));}
+      else{
+        if(x.open){const a=el('a',{class:'btn solid',href:x.open,target:'_blank',rel:'noopener',text:'Abrir ↗'});acts.append(a);}
+        if(x.dl){const b=el('button',{class:'btn line',type:'button',text:'Descargar '+(x.ext==='pdf'?'PDF':EXT[x.ext])});b.onclick=()=>save(x.dl);acts.append(b);}
+        if(x.alt){const b=el('button',{class:'btn line',type:'button',text:x.alt.label});b.onclick=()=>save(x.alt.dl);acts.append(b);}
+      }
+      row.append(acts);list.append(row);
+    });
+    sec.append(list);box.append(sec);
+  });
+}
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('.chip').forEach(o=>o.setAttribute('aria-pressed',String(o===c)));
+  render(c.dataset.f);try{localStorage.setItem('dr-filter',c.dataset.f);}catch(e){}
+}));
+let start='all';try{start=localStorage.getItem('dr-filter')||'all';}catch(e){}
+document.querySelectorAll('.chip').forEach(o=>o.setAttribute('aria-pressed',String(o.dataset.f===start)));
+render(start);
+
+// progress
+const weeks=['S1','S2','S3','S4','S5','S6','S7','S8'];
+const t0=Date.UTC(2026,9,19),d=new Date(),today=Date.UTC(d.getFullYear(),d.getMonth(),d.getDate());
+const cur=Math.max(0,Math.min(7,Math.floor((today-t0)/6048e5)));
+const pg=document.getElementById('prog');
+weeks.forEach((w,i)=>pg.append(el('div',{class:i<cur?'done':i===cur?'now':''},el('i'),el('small',{text:w}))));
+document.getElementById('progTitle').textContent='Semana '+(cur+1)+' de 8';
+const done=FOLDERS.reduce((n,f)=>n+f.files.filter(x=>!x.empty).length,0),total=FOLDERS.reduce((n,f)=>n+f.files.length,0);
+document.getElementById('progText').textContent=done+' de '+total+' entregables cargados en el Data Room.';
+
+if(GITHUB_BROCHURE){const g=document.getElementById('ghBtn');g.href=GITHUB_BROCHURE;g.hidden=false;document.getElementById('ghPending').hidden=true;}
+
+</script>
+
+</body>
+</html>
