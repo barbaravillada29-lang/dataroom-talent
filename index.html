@@ -94,6 +94,15 @@ header.hero{padding-block:56px 32px}
 .acts .btn{padding:7px 12px;font-size:13px}
 @media (max-width:640px){.file{grid-template-columns:44px 1fr}.acts{grid-column:1/-1;justify-content:flex-start}}
 
+.ia{border-top:1px solid var(--line);padding-block:40px 8px;display:grid;grid-template-columns:72px 1fr;gap:16px}
+.ia .fnum{padding-top:4px}
+.ia h3{font-size:24px;line-height:1.2}
+.ia .lead{color:var(--soft);margin-top:10px;max-width:70ch}
+.ia ul{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ia li{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--ink-2);display:flex;flex-direction:column;gap:6px;min-width:0}
+.ia li b{font-weight:500;color:var(--sand)}
+.ia li span{color:var(--mute);font-size:14px}
+@media (max-width:640px){.ia{grid-template-columns:1fr}.ia ul{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--line);padding-block:32px 48px;margin-top:24px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--mute);font-size:13px}
 .toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sand);color:var(--ink);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:500;z-index:30}
@@ -139,6 +148,19 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
   </section>
 
   <div id="folders"></div>
+  <section class="ia" aria-labelledby="ia-t">
+    <span class="fnum">IA</span>
+    <div>
+      <h3 id="ia-t">Declaración de uso de inteligencia artificial</h3>
+      <p class="lead">El equipo consultor usó inteligencia artificial generativa (Claude, de Anthropic) como herramienta de apoyo, de forma responsable y transparente, para elaborar los entregables de este Data Room.</p>
+      <ul>
+        <li><b>Para qué la usamos</b><span>Organizar y mejorar la redacción, estructurar el informe y la presentación, y diseñar y programar este Data Room y el brochure web.</span></li>
+        <li><b>Qué es del equipo</b><span>Los perfiles, los resultados del test de entrada, el acuerdo de trabajo, el cronograma y las respuestas del cliente en el diagnóstico los aportamos nosotras.</span></li>
+        <li><b>Cómo la controlamos</b><span>Revisamos, corregimos y validamos todo el contenido generado antes de publicarlo. Las decisiones, los análisis y las conclusiones son nuestros.</span></li>
+        <li><b>Responsabilidad</b><span>El equipo asume la autoría y la responsabilidad del contenido entregado, y no compartió datos sensibles del cliente más allá de los necesarios para el trabajo.</span></li>
+      </ul>
+    </div>
+  </section>
 </main>
 
 <footer><div class="wrap">
