@@ -128,9 +128,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
       <p>Página web con los perfiles de las cinco consultoras, la lectura del test de entrada, el acuerdo de trabajo en equipo, el Gantt de las ocho semanas y las firmas.</p>
       <div class="row">
         <a class="btn solid" href="brochure/index.html" target="_blank" rel="noopener">Abrir brochure ↗</a>
-        <a class="btn line" id="ghBtn" href="#" target="_blank" rel="noopener" hidden>Ver en GitHub ↗</a>
       </div>
-      <div class="link-box" id="ghPending" style="color:#6b5d45">Versión en GitHub Pages: pendiente de publicar</div>
     </div>
     <div class="fcard dark">
       <p class="mono">Avance del núcleo</p>
@@ -156,8 +154,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 <div class="toast" id="toast" hidden></div>
 
 <script>
-// Configure here: GitHub Pages URL of the brochure once published
-const GITHUB_BROCHURE = "https://barbaravillada29-lang.github.io/dataroom-talent/brochure/";
 
 const FOLDERS = [
  {id:'equipo',num:'00',k:'eq',title:'Equipo consultor',desc:'Documentos de conformación del equipo y planeación general.',st:'c',files:[
@@ -236,7 +232,6 @@ document.getElementById('progTitle').textContent='Semana '+(cur+1)+' de 8';
 const done=FOLDERS.reduce((n,f)=>n+f.files.filter(x=>!x.empty).length,0),total=FOLDERS.reduce((n,f)=>n+f.files.length,0);
 document.getElementById('progText').textContent=done+' de '+total+' entregables cargados en el Data Room.';
 
-if(GITHUB_BROCHURE){const g=document.getElementById('ghBtn');g.href=GITHUB_BROCHURE;g.hidden=false;document.getElementById('ghPending').hidden=true;}
 
 </script>
 
