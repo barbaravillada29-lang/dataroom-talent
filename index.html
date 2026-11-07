@@ -120,7 +120,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 <header class="hero"><div class="wrap">
   <p class="mono">Laboratorio de Ideas: Creación de Empresa · 19 oct – 13 dic 2026</p>
   <h1 style="margin-top:14px">Data Room de la consultoría <em>TALENT</em></h1>
-  <p class="lede">Aquí guardamos todas las entregas y avances del Trabajo de Aplicación, organizadas por semana del núcleo. Cada carpeta corresponde a una entrega en Canvas.</p>
+  <p class="lede">Aquí guardamos todas las entregas y avances del Trabajo de Aplicación, organizadas por entrega del núcleo. Cada carpeta corresponde a un Trabajo de Aplicación y contiene sus productos oficiales en PDF descargable.</p>
   <div class="meta">
     <span>Docente · Santiago Arias Torres</span>
     <span>Grupo · 123217</span>
@@ -154,8 +154,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
       <h3 id="ia-t">Declaración de uso de inteligencia artificial</h3>
       <p class="lead">El equipo consultor usó inteligencia artificial generativa (Claude, de Anthropic) como herramienta de apoyo, de forma responsable y transparente, en el diseño y la construcción de los recursos digitales de este Data Room.</p>
       <ul>
-        <li><b>Para qué la usamos</b><span>Diseñar y programar esta página web y el brochure del equipo consultor, y diseñar la presentación en PowerPoint.</span></li>
-        <li><b>Qué es del equipo</b><span>Los perfiles, los resultados del test de entrada, el acuerdo de trabajo, el cronograma y las respuestas del cliente en el diagnóstico los aportamos nosotras.</span></li>
+        <li><b>Para qué la usamos</b><span>Diseñar y programar esta página web y el brochure del equipo consultor, y diseñar las presentaciones en PowerPoint. En la TA1, también para diseñar las fichas nemotécnicas y organizar y dar formato a los documentos.</span></li>
+        <li><b>Qué es del equipo</b><span>Los perfiles, los resultados del test de entrada, el acuerdo de trabajo, el cronograma, las respuestas del cliente, las consultas en la SIC y en la Cámara de Comercio y las decisiones los aportamos nosotras y la cliente.</span></li>
         <li><b>Cómo la controlamos</b><span>Revisamos, corregimos y validamos todo el contenido generado antes de publicarlo. Las decisiones, los análisis y las conclusiones son nuestros.</span></li>
         <li><b>Responsabilidad</b><span>El equipo asume la autoría y la responsabilidad del contenido entregado, y no compartió datos sensibles del cliente más allá de los necesarios para el trabajo.</span></li>
       </ul>
@@ -165,24 +165,26 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 
 <footer><div class="wrap">
   <span>Talent · People Infrastructure</span>
-  <span>Última actualización: 28 de octubre de 2026</span>
+  <span>Última actualización: 6 de noviembre de 2026</span>
 </div></footer>
 <div class="toast" id="toast" hidden></div>
 
 <script>
 
 const FOLDERS = [
- {id:'diag',num:'S2',k:'ta',title:'Semana 2 · Diagnóstico inicial',desc:'Punto de partida · entrega 30 oct · carpeta “Diagnóstico”',st:'p',files:[
+ {id:'diag',num:'PP',k:'ta',title:'Diagnóstico',desc:'Punto de partida · semana 2 · entregado 30 oct',st:'c',files:[
    {t:'Brochure del equipo consultor',d:'Elemento 1 · página web',ext:'web',open:'brochure/index.html'},
    {t:'Informe escrito de consultoría',d:'Elemento 2 · selección, BMC, diagnóstico y ruta',ext:'pdf',open:'files/Informe_Consultoria_TALENT.pdf',dl:'files/Informe_Consultoria_TALENT.pdf'},
-   {t:'Accountability · presentación al cliente',d:'Elemento 3 · 13 diapositivas',ext:'pdf',open:'files/Accountability_TALENT.pdf',dl:'files/Accountability_TALENT.pdf',alt:{label:'PowerPoint',dl:'files/Accountability_TALENT.pptx.b64.txt'}},
-   {t:'Cronograma del Trabajo de Aplicación (Gantt)',d:'Excel · 19 oct – 13 dic 2026 · responsables y estados',ext:'xls',dl:'files/Cronograma_Gantt_TALENT.xlsx.b64.txt'}]},
- {id:'s3',num:'S3',k:'w',title:'Semana 3',desc:'2 – 8 nov',st:'i',files:[]},
- {id:'s4',num:'S4',k:'w',title:'Semana 4',desc:'9 – 15 nov',st:'i',files:[]},
- {id:'s5',num:'S5',k:'w',title:'Semana 5',desc:'16 – 22 nov',st:'i',files:[]},
- {id:'s6',num:'S6',k:'w',title:'Semana 6',desc:'23 – 29 nov',st:'i',files:[]},
- {id:'s7',num:'S7',k:'w',title:'Semana 7',desc:'30 nov – 6 dic',st:'i',files:[]},
- {id:'s8',num:'S8',k:'w',title:'Semana 8',desc:'7 – 13 dic',st:'i',files:[]}
+   {t:'Accountability · presentación al cliente',d:'Elemento 3 · 13 diapositivas',ext:'pdf',open:'files/Accountability_TALENT.pdf',dl:'files/Accountability_TALENT.pdf',alt:{label:'PowerPoint',dl:'files/Accountability_TALENT.pptx'}}]},
+ {id:'ta1',num:'TA1',k:'ta',title:'Debida Diligencia Formalización de Entrada',desc:'Semana 3 · entrega 10 nov · forma societaria, acuerdos previos, estatutos y marca',st:'p',files:[
+   {t:'Informe escrito de consultoría con anexos',d:'Elemento 1 · APA 7 · matriz comparativa, ficha de acuerdos, revisión de la minuta S.A.S., rastreo marcario y matriz de vacíos',ext:'pdf',open:'files/ta1/Informe_TA1_con_Anexos_TALENT.pdf',dl:'files/ta1/Informe_TA1_con_Anexos_TALENT.pdf'},
+   {t:'Accountability · presentación al cliente',d:'Elemento 2 · 15 diapositivas',ext:'pdf',open:'files/ta1/Accountability_TA1_TALENT.pdf',dl:'files/ta1/Accountability_TA1_TALENT.pdf',alt:{label:'PowerPoint',dl:'files/ta1/Accountability_TA1_TALENT.pptx'}},
+   {t:'Hand Book Pedagógico · fichas nemotécnicas',d:'Elemento 3 · acuerdos previos, estatutos y registro de marca',ext:'pdf',open:'files/ta1/Hand_Book_TALENT.pdf',dl:'files/ta1/Hand_Book_TALENT.pdf'}]},
+ {id:'ta2',num:'TA2',k:'ta',title:'Expansión empresarial',desc:'Semana 5 · 16 – 22 nov',st:'i',files:[]},
+ {id:'ta3',num:'TA3',k:'ta',title:'Crisis empresarial',desc:'Semana 7 · 30 nov – 6 dic',st:'i',files:[]},
+ {id:'ta4',num:'TA4',k:'ta',title:'Informe integrado',desc:'Semanas 7 y 8 · 30 nov – 11 dic',st:'i',files:[]},
+ {id:'eq',num:'EQ',k:'w',title:'Gestión del equipo consultor',desc:'Documentos de apoyo, fuera de las carpetas de entrega',st:'c',files:[
+   {t:'Cronograma del Trabajo de Aplicación (Gantt)',d:'Excel · 19 oct – 13 dic 2026 · responsables y estados',ext:'xls',dl:'files/Cronograma_Gantt_TALENT.xlsx'}]}
 ];
 const ST={c:['c','Completada'],p:['p','En entrega'],i:['i','Por iniciar']};
 const EXT={web:'WEB',pdf:'PDF',doc:'DOC',ppt:'PPT',xls:'XLS',vid:'VID',img:'IMG'};
@@ -213,7 +215,7 @@ function render(filter){
       }
       row.append(acts);list.append(row);
     });
-    if(!f.files.length)list.append(el('div',{class:'file empty'},el('span',{class:'ext',text:'—'}),el('div',{},el('b',{text:'Sin entregables todavía'}),el('small',{text:'Se cargan al completar la semana'}))));
+    if(!f.files.length)list.append(el('div',{class:'file empty'},el('span',{class:'ext',text:'—'}),el('div',{},el('b',{text:'Sin entregables todavía'}),el('small',{text:'Se cargan al completar la entrega'}))));
     sec.append(list);box.append(sec);
   });
 }
