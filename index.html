@@ -134,9 +134,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
     <div class="fcard sand">
       <p class="mono">Brochure del equipo consultor</p>
       <h2>Conoce al equipo: perfiles, test de entrada, acuerdo y cronograma</h2>
-      <p>Página web con los perfiles de las cinco consultoras, la lectura del test de entrada, el acuerdo de trabajo en equipo, el Gantt de las ocho semanas y las firmas.</p>
+      <p>Documento PDF descargable, con versión web, con los perfiles de las cinco consultoras, la lectura del test de entrada, el acuerdo de trabajo en equipo, el Gantt de las ocho semanas y las firmas.</p>
       <div class="row">
-        <a class="btn solid" href="brochure/index.html" target="_blank" rel="noopener">Abrir brochure ↗</a>
+        <a class="btn solid" href="files/Brochure_Equipo_Consultor_TALENT.pdf" target="_blank" rel="noopener">Abrir brochure en PDF ↗</a>
+        <a class="btn line" href="brochure/index.html" target="_blank" rel="noopener">Versión web ↗</a>
       </div>
     </div>
     <div class="fcard dark">
@@ -173,7 +174,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 
 const FOLDERS = [
  {id:'diag',num:'PP',k:'ta',title:'Diagnóstico',desc:'Punto de partida · semana 2 · entregado 30 oct',st:'c',files:[
-   {t:'Brochure del equipo consultor',d:'Elemento 1 · página web',ext:'web',open:'brochure/index.html'},
+   {t:'Brochure del equipo consultor',d:'Elemento 1 · perfiles, test de entrada, acuerdo de trabajo, cronograma y firmas · versión web como complemento',ext:'pdf',open:'files/Brochure_Equipo_Consultor_TALENT.pdf',dl:'files/Brochure_Equipo_Consultor_TALENT.pdf',web:'brochure/index.html'},
    {t:'Informe escrito de consultoría',d:'Elemento 2 · selección, BMC, diagnóstico y ruta',ext:'pdf',open:'files/Informe_Consultoria_TALENT.pdf',dl:'files/Informe_Consultoria_TALENT.pdf'},
    {t:'Accountability · presentación al cliente',d:'Elemento 3 · 13 diapositivas',ext:'pdf',open:'files/Accountability_TALENT.pdf',dl:'files/Accountability_TALENT.pdf',alt:{label:'PowerPoint',dl:'files/Accountability_TALENT.pptx'}}]},
  {id:'ta1',num:'TA1',k:'ta',title:'Debida Diligencia Formalización de Entrada',desc:'Semana 3 · entrega 10 nov · forma societaria, acuerdos previos, estatutos y marca',st:'p',files:[
@@ -211,6 +212,7 @@ function render(filter){
       else{
         if(x.open){const a=el('a',{class:'btn solid',href:x.open,target:'_blank',rel:'noopener',text:'Abrir ↗'});acts.append(a);}
         if(x.dl){const b=el('button',{class:'btn line',type:'button',text:'Descargar '+(x.ext==='pdf'?'PDF':EXT[x.ext])});b.onclick=()=>save(x.dl);acts.append(b);}
+        if(x.web){acts.append(el('a',{class:'btn line',href:x.web,target:'_blank',rel:'noopener',text:'Versión web ↗'}));}
         if(x.alt){const b=el('button',{class:'btn line',type:'button',text:x.alt.label});b.onclick=()=>save(x.alt.dl);acts.append(b);}
       }
       row.append(acts);list.append(row);
